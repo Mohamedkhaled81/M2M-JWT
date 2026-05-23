@@ -1,9 +1,24 @@
-import { verify } from "jsonwebtoken";
+import { verify, sign } from "jsonwebtoken";
 import { serversConfigDetails } from "../config/index.js";
 
 const verifyOptions = {
   algorithms: ["HS256"],
 };
+
+const signOptions = {
+  algorithm: "HS256",
+  expiresIn: "15m",
+  issuer: serversConfigDetails.srvrName,
+};
+
+/**
+ * @param subject : unique id of entity
+ */
+export function createToken(subject, payload = {}) {
+    const options  = {...signOptions, subject};
+    return sign(payload, serversConfigDetails.tokenSecret, options)
+}
+
 
 export function verifyToken(token) {
   let decodedToken = null;

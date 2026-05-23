@@ -5,5 +5,8 @@ export const serversConfigDetails = {
     srvrHost: "localhost",
     srvrPort: +process.env.serverFlag ? process.env.SERVER_B_PORT : process.env.SERVER_A_PORT,
     srvrName: +process.env.serverFlag ? process.env.SERVER_B_NAME : process.env.SERVER_A_NAME,
+
+    otherPort: +process.env.serverFlag ? process.env.SERVER_A_PORT : process.env.SERVER_B_PORT,
+    otherName: +process.env.serverFlag ? process.env.SERVER_A_NAME : process.env.SERVER_B_NAME,
     tokenSecret: process.env.TOKEN_SECRET
 };

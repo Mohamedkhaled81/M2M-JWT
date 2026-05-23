@@ -1,4 +1,4 @@
-import { verify, sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { serversConfigDetails } from "../config/index.js";
 
 const verifyOptions = {
@@ -15,15 +15,14 @@ const signOptions = {
  * @param subject : unique id of entity
  */
 export function createToken(subject, payload = {}) {
-    const options  = {...signOptions, subject};
-    return sign(payload, serversConfigDetails.tokenSecret, options)
+    const options  = { ...signOptions, subject };
+    return jwt.sign(payload, serversConfigDetails.tokenSecret, options);
 }
-
 
 export function verifyToken(token) {
   let decodedToken = null;
   try {
-    decodedToken = verify(
+    decodedToken = jwt.verify(
       token,
       serversConfigDetails.tokenSecret,
       verifyOptions,

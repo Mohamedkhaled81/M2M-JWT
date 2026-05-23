@@ -1,10 +1,10 @@
-import { createToken } from "../service/token/js"
+import { createToken } from "../service/token.js"
 import { serversConfigDetails as config}  from "../config/index.js"
 import axios from "axios";
 
 
 export async function produce(req, res) {
-    const tokenPayload = { mssg: `Hello From ${serversConfigDetails.srvrName}`}
+    const tokenPayload = { mssg: `Hello From ${config.srvrName}`}
     const token = createToken('test', tokenPayload);
     
     const url = `http://${config.srvrHost}:${config.otherPort}/api/consume`;
